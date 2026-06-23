@@ -428,7 +428,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'DM Sans',sans-seri
 
 <script>
 /* ── State ── */
-var tasks=[], completed=[], zTop=10, pSubs=[], editId=null, delId=null, dblPos=null;
+var tasks=[], completed=[], zTop=10, pSubs=[], editId=null, delId=null, delActiveId=null, dblPos=null;
 var TMAX=6, CW=252;
 var $cv=document.getElementById('cv');
 var $cw=document.getElementById('cw');
@@ -652,9 +652,16 @@ function doRestore(id){
 
 /* ── Delete confirm ── */
 document.getElementById('cp-yes').onclick=function(){
-  if(delId){completed=completed.filter(function(t){return t.id!==delId;});delId=null;$cpop.classList.remove('open');save();renderTray();}
+  if(delActiveId){
+    tasks=tasks.filter(function(t){return t.id!==delActiveId;});
+    var el=document.getElementById('card-'+delActiveId);
+    if(el){el.style.transition='opacity .28s,transform .28s';el.style.opacity='0';el.style.transform+=' scale(.88)';setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el);},300);}
+    delActiveId=null;$cpop.classList.remove('open');save();upEmpty();
+  } else if(delId){
+    completed=completed.filter(function(t){return t.id!==delId;});delId=null;$cpop.classList.remove('open');save();renderTray();
+  }
 };
-document.getElementById('cp-no').onclick=function(){delId=null;$cpop.classList.remove('open');};
+document.getElementById('cp-no').onclick=function(){delId=null;delActiveId=null;$cpop.classList.remove('open');};
 
 /* ── Render tray ── */
 function renderTray(){
@@ -688,6 +695,18 @@ function renderTray(){
 
 /* ── Drag ── */
 function bindDrag(el,id){
+  var lastRCtx=0;
+  el.addEventListener('contextmenu',function(e){
+    e.preventDefault();e.stopPropagation();
+    var now=Date.now();
+    if(now-lastRCtx<400){
+      lastRCtx=0;
+      var task=tasks.find(function(t){return t.id===id;});if(!task)return;
+      delActiveId=id;delId=null;
+      document.getElementById('cp-lbl').textContent='「'+task.title.slice(0,16)+(task.title.length>16?'…':'')+'」';
+      $cpop.classList.add('open');
+    } else {lastRCtx=now;}
+  });
   el.addEventListener('mousedown',function(e){
     if(e.target.closest('.stask')||e.target.closest('.c-hover-acts'))return;
     e.preventDefault();
