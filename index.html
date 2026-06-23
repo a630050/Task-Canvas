@@ -56,35 +56,35 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'DM Sans',sans-seri
 
 /* ─── Toolbar ─── */
 #tb{
-  position:fixed;top:0;left:0;right:0;height:50px;
+  position:fixed;top:0;left:0;right:0;height:38px;
   background:var(--tb-bg);backdrop-filter:blur(22px) saturate(1.6);-webkit-backdrop-filter:blur(22px) saturate(1.6);
   border-bottom:1px solid var(--border-s);
-  display:flex;align-items:center;justify-content:space-between;padding:0 20px;z-index:9000;
+  display:flex;align-items:center;justify-content:space-between;padding:0 12px;z-index:9000;
   transition:background .26s,border-color .26s;
 }
-.brand{font-family:'DM Serif Display',serif;font-size:16px;letter-spacing:-.025em;color:var(--t1);opacity:.82;display:flex;align-items:baseline;gap:3px;transition:color .26s;}
-.brand em{font-style:italic;opacity:.48;font-size:13px;}
-.tb-right{display:flex;align-items:center;gap:10px;}
-.tb-hint{font-size:11.5px;color:var(--t3);letter-spacing:.02em;transition:color .26s;}
+.brand{font-family:'DM Serif Display',serif;font-size:13px;letter-spacing:-.025em;color:var(--t1);opacity:.82;display:flex;align-items:baseline;gap:2px;transition:color .26s;}
+.brand em{font-style:italic;opacity:.48;font-size:11px;}
+.tb-right{display:flex;align-items:center;gap:8px;}
+.tb-hint{font-size:10px;color:var(--t3);letter-spacing:.02em;transition:color .26s;}
 
 /* Dark toggle pill */
 #dm-btn{
-  position:relative;width:38px;height:22px;border-radius:11px;border:none;cursor:pointer;padding:0;
+  position:relative;width:32px;height:18px;border-radius:9px;border:none;cursor:pointer;padding:0;
   background:rgba(0,0,0,.12);transition:background .24s;flex-shrink:0;
 }
 [data-theme="dark"] #dm-btn{background:rgba(110,110,255,.40);}
 #dm-btn::after{
-  content:'';position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;
+  content:'';position:absolute;top:3px;left:3px;width:12px;height:12px;border-radius:50%;
   background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.22);
   transition:transform .22s cubic-bezier(.34,1.56,.64,1);
 }
-[data-theme="dark"] #dm-btn::after{transform:translateX(16px);}
-#dm-icon{font-size:14px;position:absolute;top:50%;right:5px;transform:translateY(-50%);pointer-events:none;line-height:1;}
-[data-theme="dark"] #dm-icon{right:auto;left:5px;}
+[data-theme="dark"] #dm-btn::after{transform:translateX(14px);}
+#dm-icon{font-size:11px;position:absolute;top:50%;right:4px;transform:translateY(-50%);pointer-events:none;line-height:1;}
+[data-theme="dark"] #dm-icon{right:auto;left:4px;}
 
 /* Quadrant color toggle */
 #qd-btn{
-  width:30px;height:22px;border-radius:8px;border:none;cursor:pointer;padding:0;
+  width:24px;height:18px;border-radius:6px;border:none;cursor:pointer;padding:0;
   background:rgba(0,0,0,.08);color:var(--t3);
   display:flex;align-items:center;justify-content:center;
   transition:background .18s,color .18s;flex-shrink:0;
@@ -95,16 +95,8 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'DM Sans',sans-seri
 [data-theme="dark"] #qd-btn:hover{background:rgba(255,255,255,.13);color:var(--t1);}
 [data-theme="dark"] #qd-btn.active{background:rgba(100,160,255,.18);color:rgba(140,180,255,.95);}
 
-#add-btn{
-  display:flex;align-items:center;gap:5px;background:var(--accent);color:var(--accent-inv);
-  border:none;border-radius:9px;padding:7px 13px;font:500 12.5px/1 'DM Sans',sans-serif;
-  cursor:pointer;transition:opacity .14s,transform .1s,background .26s,color .26s;
-}
-#add-btn:hover{opacity:.76;transform:scale(1.025);}
-#add-btn svg{width:12px;height:12px;}
-
 /* ─── Canvas ─── */
-#cw{position:fixed;top:50px;left:0;right:0;bottom:var(--tray-h);overflow:hidden;}
+#cw{position:fixed;top:38px;left:0;right:0;bottom:var(--tray-h);overflow:hidden;}
 #cw::before,#cw::after{content:'';position:absolute;pointer-events:none;z-index:0;transition:background .26s;}
 #cw::before{left:50%;top:12px;bottom:12px;width:1px;background:var(--axis);transform:translateX(-50%);}
 #cw::after{top:50%;left:12px;right:12px;height:1px;background:var(--axis);transform:translateY(-50%);}
@@ -355,7 +347,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'DM Sans',sans-seri
   <span class="tb-hint">空間即優先級</span>
   <div class="tb-right">
     <button id="qd-btn" title="象限顏色">
-      <svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor">
+      <svg width="11" height="11" viewBox="0 0 13 13" fill="currentColor">
         <rect x="0" y="0" width="5.5" height="5.5" rx="1.2"/>
         <rect x="7.5" y="0" width="5.5" height="5.5" rx="1.2"/>
         <rect x="0" y="7.5" width="5.5" height="5.5" rx="1.2"/>
@@ -364,12 +356,6 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'DM Sans',sans-seri
     </button>
     <button id="dm-btn" title="夜間模式" aria-label="切換深色模式">
       <span id="dm-icon">🌙</span>
-    </button>
-    <button id="add-btn">
-      <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-        <line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/>
-      </svg>
-      新增任務
     </button>
   </div>
 </div>
@@ -387,7 +373,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'DM Sans',sans-seri
     <div class="qd-quad" id="qd-br"></div>
     <div id="empty">
       <div class="eh-t">這裡是你的任務桌面</div>
-      <div class="eh-s">點擊右上角新增任務，拖到適合位置</div>
+      <div class="eh-s">在空白處快點兩下即可新增任務</div>
     </div>
   </div>
 </div>
@@ -442,7 +428,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'DM Sans',sans-seri
 
 <script>
 /* ── State ── */
-var tasks=[], completed=[], zTop=10, pSubs=[], editId=null, delId=null;
+var tasks=[], completed=[], zTop=10, pSubs=[], editId=null, delId=null, dblPos=null;
 var TMAX=6, CW=252;
 var $cv=document.getElementById('cv');
 var $cw=document.getElementById('cw');
@@ -739,14 +725,20 @@ document.getElementById('m-as').onclick=addSub;
 $msi.addEventListener('keydown',function(e){if(e.key==='Enter')addSub();});
 document.getElementById('m-cn').onclick=closeModal;
 $mo.addEventListener('click',function(e){if(e.target===$mo)closeModal();});
-function closeModal(){$mo.classList.remove('open');editId=null;}
-
-/* ── Open CREATE ── */
-document.getElementById('add-btn').onclick=function(){
+function closeModal(){$mo.classList.remove('open');editId=null;dblPos=null;}
+function openCreate(){
   editId=null;pSubs=[];$mti.value='';$msi.value='';$msl.innerHTML='';
   $mdh.textContent='新增任務';$mok.textContent='放到桌面';
   $mo.classList.add('open');setTimeout(function(){$mti.focus();},80);
-};
+}
+
+/* ── Double-click canvas to create ── */
+$cv.addEventListener('dblclick',function(e){
+  if(e.target.closest('.card'))return;
+  var r=$cw.getBoundingClientRect();
+  dblPos={x:e.clientX-r.left, y:e.clientY-r.top};
+  openCreate();
+});
 
 /* ── Open EDIT ── */
 function openEdit(id){
@@ -772,10 +764,12 @@ $mok.onclick=function(){
     closeModal();
   } else {
     var wr=$cw.getBoundingClientRect();
-    var x=wr.width*.5-CW/2+(Math.random()*100-50);
-    var y=wr.height*.5-90+(Math.random()*60-30);
+    var x, y;
+    if(dblPos){x=dblPos.x;y=dblPos.y;}
+    else{x=wr.width*.5-CW/2+(Math.random()*100-50);y=wr.height*.5-90+(Math.random()*60-30);}
     var t2={id:uid(),title:title,subtasks:pSubs.map(function(s){return{id:s.id,text:s.text,done:false};}),
-      x:Math.max(0,x),y:Math.max(0,y),z:++zTop,rot:parseFloat((Math.random()*8-4).toFixed(2)),priority:'P3'};
+      x:Math.max(0,Math.min(wr.width-CW,x)),y:Math.max(0,Math.min(wr.height-44,y)),
+      z:++zTop,rot:parseFloat((Math.random()*8-4).toFixed(2)),priority:'P3'};
     t2.priority=getPrio(t2.x+CW/2,t2.y+30);
     tasks.push(t2);closeModal();renderCard(t2);save();upEmpty();
   }
